@@ -5,12 +5,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Data
-@Table(name = "GUESSING_GAME")
+@Table(name = "guessing_game")
 public class GuessingGame {
 
     @Id
     private Long id;
-    private Long correctAnswer;
+    private Integer correctAnswer;
     private String name;
 
 }

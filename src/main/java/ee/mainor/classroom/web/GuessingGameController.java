@@ -19,7 +19,7 @@ public class GuessingGameController {
     private final GuessingGameService guessingGameService;
 
     @PostMapping
-    public Integer createGame(@RequestBody GameCreateRequest gameCreateRequest) {
+    public Long createGame(@RequestBody GameCreateRequest gameCreateRequest) {
         return guessingGameService.createGame(gameCreateRequest);
     }
 

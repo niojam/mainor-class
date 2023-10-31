@@ -7,6 +7,7 @@ import ee.mainor.classroom.model.GuessingGame;
 import ee.mainor.classroom.repository.GuessingGameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.HashMap;
@@ -23,10 +24,13 @@ public class GuessingGameService {
     private Map<Integer, Integer> games = new HashMap<>();
     private Random random = new Random();
 
-    public Integer createGame(GameCreateRequest gameCreateRequest) {
-        Integer id = random.nextInt();
-        games.put(id, gameCreateRequest.getCorrectAnswer());
-        return id;
+    @Transactional
+    public Long createGame(GameCreateRequest gameCreateRequest) {
+        GuessingGame guessingGame = new GuessingGame();
+        guessingGame.setName("testName");
+        guessingGame.setCorrectAnswer(gameCreateRequest.getCorrectAnswer());
+
+        return guessingGameRepository.save(guessingGame).getId();
     }
 
     public GameResponse guessNumber(Integer gameId, Integer guessableNumber) {
