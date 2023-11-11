@@ -30,7 +30,9 @@ public class GuessingGameService {
         guessingGame.setName("testName");
         guessingGame.setCorrectAnswer(gameCreateRequest.getCorrectAnswer());
 
-        return guessingGameRepository.save(guessingGame).getId();
+
+        GuessingGame saved = guessingGameRepository.save(guessingGame);
+        return saved.getId();
     }
 
     public GameResponse guessNumber(Integer gameId, Integer guessableNumber) {
